@@ -13,6 +13,10 @@ namespace ConsoleApp1
     {
         public static async Task Main(string[] args)
         {
+            await ProcessDataAsync(); //cs5001 hibaelhárítás - chatgpt segít - main nem lehet async, azt külön hívom meg
+        }
+        public static async Task ProcessDataAsync()
+        {
             //Beolvasás
             string apiUrl = "https://retoolapi.dev/Kc6xuH/data";
             using (var httpClient = new HttpClient())
@@ -53,9 +57,9 @@ namespace ConsoleApp1
                         poziPerFo.Add(elem.position, 1); //egyről indul
                     }
                 }
-                foreach ( var arany in poziPerFo)
+                foreach (var arany in poziPerFo)
                 {
-                    Console.WriteLine($"{poziPerFo.Keys}: {poziPerFo.Values}"); //pozi - db kiírás
+                    Console.WriteLine($"{arany.Key}: {arany.Value}"); //pozi - db kiírás
                 }
             }
         }
@@ -69,7 +73,7 @@ namespace ConsoleApp1
             [JsonPropertyName("salary")]
             public int salary { get; set; }
 
-            [JsonPropertyName("positon")]
+            [JsonPropertyName("position")]
             public string position { get; set; }
         }
     }
